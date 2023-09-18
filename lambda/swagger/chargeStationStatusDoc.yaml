@@ -1,0 +1,122 @@
+paths:
+  /charge-station-status:
+    get:
+        summary : This api will get all the charge-station-status data 
+        tags: 
+            - Charge Station Status
+        responses : 
+            200 :
+                description : This api will get all the charge-station-status data 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Charge Station Status"
+   
+    post : 
+        summary : This api is used to creates new charge-station-status.
+        description : Remove `chargeStationStatusId` field from schema for new record.
+        tags:
+            - Charge Station Status
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Charge Station Status"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Charge Station Status"
+  
+    patch : 
+        summary : This api is used to update charge-station-status details.
+        tags:
+            - Charge Station Status
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Charge Station Status"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Charge Station Status"
+  
+    delete : 
+        summary : This api is used to remove an existing charge-station-status.
+        description : If `deleteAll` is, 
+                    <br> &nbsp;&nbsp;&nbsp; - **true**, all records will be deleted.
+                    <br> &nbsp;&nbsp;&nbsp; - **false**, please specify `chargeStationStatusId` to delete specific Charger Station Status
+        tags:
+            - Charge Station Status
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            chargeStationStatusId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Charge Station Status"
+  
+
+components :
+    schema :
+      Charge Station Status : 
+        type : object
+        properties :
+          chargeStationStatusId : 
+            type : string
+          name :
+            type : string
+          station : 
+            type : string
+          status : 
+            type : string

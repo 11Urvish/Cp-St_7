@@ -1,0 +1,181 @@
+paths:
+  /user:
+    get:
+        summary : This api will get all the users data
+        tags: 
+            - User
+        responses : 
+            200 :
+                description : This api will get all the users data
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/User"
+   
+    post : 
+        summary : This api is used to create/register new user.
+        description : Remove `[stations, userId & tenantId]`  field from schema for new user.
+        tags:
+            - User
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/User"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/User"
+  
+    patch : 
+        summary : This api is used to update user details.
+        tags:
+            - User
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/User"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/User"
+  
+    delete : 
+        summary : This api is used to remove an existing user.
+        description : If `deleteAll` is, 
+                    <br> &nbsp;&nbsp;&nbsp; - **true**, all records will be deleted.
+                    <br> &nbsp;&nbsp;&nbsp; - **false**, please specify `userId` to delete specific User
+        tags:
+            - User
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            userId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/User"
+
+  /user/login:
+    post : 
+        summary : This api is used to create/register new user.
+        tags :
+            - User
+        requestBody :
+            required : true
+            content :
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            email :
+                                type : string
+                                required : true
+                            password :
+                                type : string
+                                required : true
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/User"
+  
+
+components :
+    schema :
+        User:
+            type : object
+            properties :
+                userId :
+                    type : string
+                role :
+                    type : string
+                isPhoneVerified :
+                    type : string
+                isActive :
+                    type : string
+                favorite :
+                    type : string
+                name :
+                    type : string
+                phone :
+                    type : string
+                country_code :
+                    type : string
+                password :
+                    type : string
+                email :
+                    type : string
+                picture :
+                    type : string
+                address :
+                    type : string
+                dob :
+                    type : string
+                gender :
+                    type : string
+                tenant :
+                    type : string
+                termsAccepted :
+                    type : string
+                status :
+                    type : string

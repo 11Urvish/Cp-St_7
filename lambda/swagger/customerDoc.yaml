@@ -1,0 +1,305 @@
+paths:
+
+  /customer/getAllCustomers:
+    post:
+        summary : This api is used for getting customer details
+        description : -`limit & page` must be > 0.
+        tags: 
+            - Customer
+        requestBody:
+          required : true
+          content :
+            application/json :
+              schema : 
+                type : object
+                properties :
+                  limit :
+                    type : integer
+                    required : true
+                  page :
+                    type : integer
+                    required : true
+        responses : 
+            200 :
+                description : This api is used for getting customer details
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Customer"
+
+
+  /customer/register:
+    post:
+        summary : This api will register a new customer 
+        description : Remove `[customerId, payMethodIds, transactionIds]` fields from schema for new Customer
+        tags: 
+            - Customer
+        requestBody:
+          required : true
+          content :
+            application/json :
+              schema : 
+                $ref : "#components/schema/Customer"
+        responses : 
+            200 :
+                description : This api will register a new customer
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Customer"
+
+  /customer/login:
+    post:
+        summary : This api is used for login operation 
+        tags: 
+            - Customer
+        requestBody:
+          required : true
+          content :
+            application/json :
+              schema : 
+                type : object
+                properties :
+                  email :
+                    type : string
+                    required : true
+                  password :
+                    type : string
+                    required : true
+        responses : 
+            200 :
+                description : This api is used for login operation 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Customer"
+  
+  /customer/getCustomerTransaction:
+    post:
+        summary : This api is used for getting transaction of selected customer 
+        tags: 
+            - Customer
+        requestBody:
+          required : true
+          content :
+            application/json :
+              schema : 
+                type : object
+                properties :
+                  customerId :
+                    customerId : string
+                    required : true
+        responses : 
+            200 :
+                description : This api is used for getting transaction of selected customer 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Customer"
+
+
+  /customer/changePassword:
+    patch:
+        summary : This api is used to change customer's password 
+        tags: 
+            - Customer
+        requestBody:
+          required : true
+          content :
+            application/json :
+              schema : 
+                type : object
+                properties :
+                  email :
+                    type : string
+                    required : true
+                  password :
+                    type : string
+                    required : true
+        responses : 
+            200 :
+                description : This api is used to change customer's password
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Customer"
+
+
+  /customer/forgotPassword:
+    post:
+        summary : This api is used for sending forgot password email. 
+        tags: 
+            - Customer
+        requestBody:
+          required : true
+          content :
+            application/json :
+              schema : 
+                type : object
+                properties :
+                  email :
+                    type : string
+                    required : true
+        responses : 
+            200 :
+                description : This api is used for sending forgot password email. 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Customer"
+
+
+  /customer/profileUpdate:
+    patch:
+        summary : This api is used for profile update 
+        tags: 
+            - Customer
+        requestBody:
+          required : true
+          content :
+            application/json :
+              schema : 
+                type : object
+                properties :
+                  customerId :
+                    type : string
+                    required : true
+                  firstName :
+                    type : string
+                  lastName :
+                    type : string
+                  status :
+                    type : integer
+        responses : 
+            200 :
+                description : This api is used for profile update 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Customer"
+
+
+  /customer/updateStatus:
+    patch:
+        summary : This api is used to update customer status 
+        tags: 
+            - Customer
+        requestBody:
+          required : true
+          content :
+            application/json :
+              schema : 
+                type : object
+                properties :
+                  customerId :
+                    type : string
+                    required : true
+                  status :
+                    type : integer
+        responses : 
+            200 :
+                description : This api is used to update customer status 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Customer"
+
+
+  
+components :
+  schema :
+    Customer : 
+      type : object
+      properties :
+        firstName :
+           type : string
+        lastName :
+           type : string
+        email :
+           type : string
+        password :
+           type : string
+        status :
+           type : string
+        custStripeId :
+           type : string
+        payMethodIds : 
+          type : array
+          items : 
+            type : string
+        transactionIds : 
+          type : array
+          items : 
+            type : string

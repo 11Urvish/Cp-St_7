@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  WatthubRestServer
+
+  Sample SAM Template for watthub_rest_server
+
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+    Tracing: Active
+  Api:
+    TracingEnabled: true
+
+Resources:
+  RestServerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: logic/
+      Handler: app.handler
+      Runtime: nodejs16.x
+      Architectures:
+      - x86_64
+      Events:
+        RestServer:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+
+  ApplicationResourceGroup:
+    Type: AWS::ResourceGroups::Group
+    Properties:
+      Name:
+        Fn::Join:
+        - ''
+        - - ApplicationInsights-SAM-
+          - Ref: AWS::StackName
+      ResourceQuery:
+        Type: CLOUDFORMATION_STACK_1_0
+  ApplicationInsightsMonitoring:
+    Type: AWS::ApplicationInsights::Application
+    Properties:
+      ResourceGroupName:
+        Fn::Join:
+        - ''
+        - - ApplicationInsights-SAM-
+          - Ref: AWS::StackName
+      AutoConfigurationEnabled: 'true'
+    DependsOn: ApplicationResourceGroup
+Outputs:
+  RestServerApi:
+    Description: API Gateway endpoint URL for Prod stage for Rest Server Function
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  RestServerFunction:
+    Description: Rest Server Lambda Function ARN
+    Value: !GetAtt RestServerFunction.Arn
+  RestServerFunctionIamRole:
+    Description: Implicit IAM Role created for Rest Server Function
+    Value: !GetAtt RestServerFunctionRole.Arn

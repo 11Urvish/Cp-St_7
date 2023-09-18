@@ -1,0 +1,122 @@
+paths:
+  /country:
+    get:
+        summary : This api will get all the country data 
+        tags: 
+            - Country
+        responses : 
+            200 :
+                description : This api will get all the countrys data 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Country"
+   
+    post : 
+        summary : This api is used to creates new country.
+        description : Remove `countryId` field for new Country
+        tags:
+            - Country
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Country"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Country"
+  
+    patch : 
+        summary : This api is used to update country details.
+        tags:
+            - Country
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Country"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Country"
+  
+    delete : 
+        summary : This api is used to remove an existing country.
+        description : If `deleteAll` is, 
+                    <br> &nbsp;&nbsp;&nbsp; - **true**, all records will be deleted.
+                    <br> &nbsp;&nbsp;&nbsp; - **false**, please specify `countryId` to delete specific Country
+        tags:
+            - Country
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            countryId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Country"
+  
+
+components :
+    schema :
+      Country : 
+        type : object
+        properties :
+          countryId : 
+            type : string
+          name :
+            type : string
+          code :
+            type : string
+          status :
+            type : string

@@ -1,0 +1,120 @@
+paths:
+  /charging-speed:
+    get:
+        summary : This api will get all the charging-speed data 
+        tags: 
+            - Charging Speed
+        responses : 
+            200 :
+                description : This api will get all the charging-speed data 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Charging Speed"
+   
+    post : 
+        summary : This api is used to creates new chargingSpeed.
+        description : Remove `chargingSpeedId` field from schema for new Charging Speed.
+        tags:
+            - Charging Speed
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Charging Speed"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Charging Speed"
+  
+    patch : 
+        summary : This api is used to update chargingSpeed details.
+        tags:
+            - Charging Speed
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Charging Speed"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Charging Speed"
+  
+    delete : 
+        summary : This api is used to remove an existing chargingSpeed.
+        description : If `deleteAll` is, 
+                    <br> &nbsp;&nbsp;&nbsp; - **true**, all records will be deleted.
+                    <br> &nbsp;&nbsp;&nbsp; - **false**, please specify `chargingSpeedId` to delete specific record
+        tags:
+            - Charging Speed
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            chargingSpeedId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Charging Speed"
+  
+
+components :
+    schema :
+      Charging Speed : 
+        type : object
+        properties :
+          chargingSpeedId : 
+            type : string
+          name :
+            type : string
+          status :
+            type : string

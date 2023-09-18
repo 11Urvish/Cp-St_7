@@ -1,0 +1,120 @@
+paths:
+  /oem-vendor:
+    get:
+        summary : This api will get all the oem vendors data 
+        tags: 
+            - OemVendor
+        responses : 
+            200 :
+                description : This api will get all the oem vendors data 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/OemVendor"
+   
+    post : 
+        summary : This api is used to creates new oem-vendor.
+        description : Remove `oemVendorId` field from new OemVendor.
+        tags:
+            - OemVendor
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/OemVendor"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/OemVendor"
+  
+    patch : 
+        summary : This api is used to update oem-vendor details.
+        tags:
+            - OemVendor
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/OemVendor"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/OemVendor"
+  
+    delete : 
+        summary : This api is used to remove an existing oem-vendor.
+        description : If `deleteAll` is, 
+                    <br> &nbsp;&nbsp;&nbsp; - **true**, all records will be deleted.
+                    <br> &nbsp;&nbsp;&nbsp; - **false**, please specify `oemVendorId` to delete specific OEM Vendor
+        tags:
+            - OemVendor
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            oemVendorId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/OemVendor"
+  
+
+components :
+    schema :
+      OemVendor : 
+        type : object
+        properties :
+          oemVendorId : 
+            type : string
+          name :
+            type : string
+          status :
+            type : string  

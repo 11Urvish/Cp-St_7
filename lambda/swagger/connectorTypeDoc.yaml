@@ -1,0 +1,126 @@
+paths:
+  /connector-type:
+    get:
+        summary : This api will get all the connector-types data 
+        tags: 
+            - Connector Type
+        responses : 
+            200 :
+                description : This api will get all the connector-types data 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Connector Type"
+   
+    post : 
+        summary : This api is used to creates new connector-type.
+        description : Remove `connectorTypeId` from schema for new connector-type.
+        tags:
+            - Connector Type
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Connector Type"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Connector Type"
+  
+    patch : 
+        summary : This api is used to update connector-type details.
+        tags:
+            - Connector Type
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Connector Type"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Connector Type"
+  
+    delete : 
+        summary : This api is used to remove an existing connector-type.
+        description : If `deleteAll` is, 
+                    <br> &nbsp;&nbsp;&nbsp; - **true**, all records will be deleted.
+                    <br> &nbsp;&nbsp;&nbsp; - **false**, please specify `connectorTypeId` to delete specific Connector Type.  
+        tags:
+            - Connector Type
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            connectorTypeId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Connector Type"
+  
+
+components :
+    schema :
+      Connector Type : 
+        type : object
+        properties :
+          connectorTypeId : 
+            type : string
+          name : 
+            type : string
+          description : 
+            type : string
+          icon : 
+            type : string
+          connector_mode : 
+            type : string
+          connector_standard : 
+            type : string

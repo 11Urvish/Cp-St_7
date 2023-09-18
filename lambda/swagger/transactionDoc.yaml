@@ -1,0 +1,67 @@
+paths:
+  /transaction:
+    get:
+        summary : This api will get all the transactions data
+        tags: 
+            - Transaction
+        responses : 
+            200 :
+                description : This api will get all the transactions data
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Transaction"
+   
+    post : 
+        summary : This api is used to creates new transaction..
+        description : Remove `transactionId` from schema for new Transaction
+        tags:
+            - Transaction
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Transaction"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Transaction"
+  
+
+components :
+    schema :
+      Transaction :
+        type : object
+        properties :
+          transactionId :
+            type : string
+          amount :
+            type : string
+          customerId :
+            type : string
+          paymentMethodId :
+            type : string
+          stripeTransactionId :
+            type : string
+          status :
+            type : string

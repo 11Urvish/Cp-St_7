@@ -1,0 +1,163 @@
+paths:
+  /charger?stationId=val:
+    get:
+        summary : This api will get all the chargers data populated with connector details of given stationId
+        tags: 
+            - Charger
+        parameters : 
+          - in : query
+            name : stationId
+            required : true
+            type : string
+        responses : 
+            200 :
+                description : This api will get all the chargers data populated with connector details of given stationId
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Charger"
+   
+  /charger:
+    post : 
+        summary : This api is used to creates new charger.
+        description : Remove `[chargerId & connectors]` for new charger.
+        tags:
+            - Charger
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Charger"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Charger"
+  
+    patch : 
+        summary : This api is used to update charger details.
+        tags:
+            - Charger
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Charger"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Charger"
+  
+    delete : 
+        summary : This api is used to remove an existing charger.
+        tags:
+            - Charger
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            chargerId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Charger"
+  
+
+components :
+    schema :
+      Charger :
+        type : object
+        properties :
+          chargerId :
+            type : string
+          is_active :
+            type : string
+          parking_restrictions :
+            type : string
+          name :
+            type : string
+          description :
+            type : string
+          charger_id :
+            type : string
+          oem :
+            type : string
+          connectors :
+            type : array
+            items : 
+              type : string
+          tenant :
+            type : string
+          charging_station :
+            type : string
+          access_type :
+            type : string
+          timing_type :
+            type : string
+          per_unit_rates :
+            type : string
+          comments :
+            type : string
+          cooldown_time :
+            type : string
+          charging_speed :
+            type : string
+          energy_limits :
+            type : string
+          settings :
+            type : string
+          is_enabled :
+            type : string
+          otp_verification :
+            type : string
+          charger_status :
+            type : string
+          status :
+            type : string

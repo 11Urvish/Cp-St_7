@@ -1,0 +1,38 @@
+paths:
+  /booking:
+    post : 
+        summary : This api is used to creates new booking.
+        description : Remove `bookingId` from schema for new booking.
+        tags:
+            - Booking
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Booking"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Booking"
+    
+
+components :
+    schema :
+      Booking : 
+        type : object
+        properties :
+          amount :
+            type : string
+          currency :
+            type : string

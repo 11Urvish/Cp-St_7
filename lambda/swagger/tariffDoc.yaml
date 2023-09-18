@@ -1,0 +1,120 @@
+paths:
+  /tariff:
+    get:
+        summary : This api will get all the tariffs data 
+        tags: 
+            - Tariff
+        responses : 
+            200 :
+                description : This api will get all the tariff data 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Tariff"
+   
+    post : 
+        summary : This api is used to creates new tariff.
+        description : Remove `tariffId` field from schema for new Taiff
+        tags:
+            - Tariff
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Tariff"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Tariff"
+  
+    patch : 
+        summary : This api is used to update tariff details.
+        tags:
+            - Tariff
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Tariff"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Tariff"
+  
+    delete : 
+        summary : This api is used to remove an existing tariff.
+        description : If `deleteAll` is, 
+                    <br> &nbsp;&nbsp;&nbsp; - **true**, all records will be deleted.
+                    <br> &nbsp;&nbsp;&nbsp; - **false**, please specify `tariffId` to delete specific Tariff
+        tags:
+            - Tariff
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            tariffId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Tariff"
+  
+
+components :
+    schema :
+      Tariff : 
+        type : object
+        properties :
+          tariffId : 
+            type : string
+          name :
+            type : string
+          status :
+            type : string

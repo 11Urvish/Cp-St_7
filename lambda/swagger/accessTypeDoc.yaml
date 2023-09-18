@@ -1,0 +1,124 @@
+paths:
+  /access-type:
+    get:
+        summary : This api will get all the access-types data 
+        tags: 
+            - Access Type
+        responses : 
+            200 :
+                description : This api will get all the access-types data 
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Access Type"
+   
+    post : 
+        summary : This api is used to creates new access-type.
+        description : Remove `accessTypeId` from schema for new access-type.
+        tags:
+            - Access Type
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Access Type"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Access Type"
+  
+    patch : 
+        summary : This api is used to update access-type details.
+        tags:
+            - Access Type
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Access Type"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Access Type"
+  
+    delete : 
+        summary : This api is used to remove an existing access-type.
+        description : If `deleteAll` is, 
+                    <br> &nbsp;&nbsp;&nbsp; - **true**, all records will be deleted.
+                    <br> &nbsp;&nbsp;&nbsp; - **false**, please specify `accessTypeId` to delete specific Access Type.  
+        tags:
+            - Access Type
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            accessTypeId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Access Type"
+  
+
+components :
+    schema :
+      Access Type : 
+        type : object
+        properties :
+          accessTypeId : 
+            type : string
+          name :
+            type : string
+          station :
+            type : string
+          access :
+            type : string
+          status : 
+            type : string

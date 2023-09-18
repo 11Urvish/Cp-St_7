@@ -1,0 +1,79 @@
+paths:
+  /log:
+    get:
+        summary : This api will get all the logs data
+        tags: 
+            - Log
+        responses : 
+            200 :
+                description : This api will get all the logs data
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Log"
+   
+    post : 
+        summary : This api is used to creates new log.
+        tags:
+            - Log
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        type : object
+                        properties :
+                          tanentId : 
+                            type : string
+                          chargerId : 
+                            type : string
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Log"
+  
+
+components :
+    schema :
+      Log :
+        type : object
+        properties :
+          logId : 
+            type : string
+          tenantId : 
+            type : string
+          chargerId : 
+            type : string
+          action : 
+            type : string
+          messageId : 
+            type : string
+          origin : 
+            type : string
+          request : 
+            type : string
+          requestTime : 
+            type : string
+          response : 
+            type : string
+          responseTime : 
+            type : string

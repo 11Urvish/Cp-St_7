@@ -1,0 +1,210 @@
+paths:
+  /connector?chargerId=val:
+    get:
+        summary : This api will get all the connectors data
+        tags: 
+            - Connector
+        parameters : 
+          - in : query
+            name : chargerId
+            type : string
+            required : true
+        responses : 
+            200 :
+                description : This api will get all the connectors data
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    type : array
+                                    items : 
+                                        $ref : "#components/schema/Connector"
+   
+  /connector:
+    post : 
+        summary : This api is used to creates new connector.
+        description : Remove `connectorId` field from schema for new connector.
+        tags:
+            - Connector
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Connector"
+        responses :
+            200 : 
+                description : Added Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Connector"
+  
+    patch : 
+        summary : This api is used to update connector details.
+        tags:
+            - Connector
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema : 
+                        $ref : "#components/schema/Connector"
+        responses :
+            200 : 
+                description : Updated Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Connector"
+  
+    delete : 
+        summary : This api is used to remove an existing connector.
+        description : If `deleteAll` is, 
+                    <br> &nbsp;&nbsp;&nbsp; - **true**, all records will be deleted.
+                    <br> &nbsp;&nbsp;&nbsp; - **false**, please specify `areaId` to delete specific Area
+        tags:
+            - Connector
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            deleteAll : 
+                                required : true
+                                type : boolean
+                            connectorId :
+                                type : string
+        responses :
+            200 : 
+                description : Deleted Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                data : 
+                                    $ref : "#components/schema/Connector"
+
+  /connector/start:
+    post : 
+        summary : This api is used to fire RemoteStartTransaction event.
+        tags:
+            - Connector
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            tenantId : 
+                                required : true
+                                type : string
+                            chargerId :
+                                required : true
+                                type : string
+                            idTag : 
+                                required : true
+                                type : string
+                            connectorId : 
+                                required : true
+                                type : integer
+        responses :
+            200 : 
+                description : Start Transaction Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                    example : "Transaction Started!"
+
+  /connector/stop:
+    post : 
+        summary : This api is used to fire RemoteStopTransaction event.
+        tags:
+            - Connector
+        requestBody:
+            required : true
+            content : 
+                application/json :
+                    schema :
+                        type : object
+                        properties :
+                            tenantId : 
+                                required : true
+                                type : string
+                            chargerId :
+                                required : true
+                                type : string
+                            transactionId : 
+                                required : true
+                                type : string
+        responses :
+            200 : 
+                description : Stop Transaction Successfully
+                content : 
+                    application/json :
+                        schema : 
+                            type : object
+                            properties: 
+                                success : 
+                                    type : boolean
+                                message : 
+                                    type : string
+                                    example : "Transaction Stopped!"
+  
+
+components :
+    schema :
+      Connector : 
+        type : object
+        properties :
+          connectorId : 
+            type : string
+          chargerId :
+            type : string
+            required : true
+          type : 
+            type : string
+          tariff : 
+            type : string
+          maxPower : 
+            type : string
+          current : 
+            type : string
+          phases : 
+            type : string
+          status : 
+            type : string
